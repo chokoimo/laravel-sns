@@ -10,14 +10,8 @@
         <div class="card mt-3">
           <div class="card-body text-center">
             <h2 class="h3 card-title text-center mt-2">ユーザー登録</h2>
-            <!-- <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger">
-              <i class="fab fa-google mr-1"></i>Googleで登録
-            </a> -->
-
             @include('error_card_list')
-
             <div class="card-text">
-              {{--ここから--}}
               <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="md-form">
@@ -39,12 +33,9 @@
                 </div>
                 <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">ユーザー登録</button>
               </form>
-              {{--ここまで--}}
-
               <div class="mt-0">
                 <a href="{{ route('login') }}" class="card-text">ログインはこちら</a>
               </div>
-              
             </div>
           </div>
         </div>

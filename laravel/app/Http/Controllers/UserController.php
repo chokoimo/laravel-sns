@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -18,6 +20,23 @@ class UserController extends Controller
             'user' => $user,
             'articles' => $articles,
         ]);
+    }
+
+    public function edit()
+    {
+        $auth_id = Auth::user()->id;
+        $user = User::where('id', $auth_id)->first();
+        
+        return view('users.edit',[
+            'user' => $user,
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $request->image->store('strorage/images', Auth::user()->id);
+
+        return redirect('users.update')->with('success', '新しいプロフィールを登録しました');
     }
 
     public function likes(string $name)
