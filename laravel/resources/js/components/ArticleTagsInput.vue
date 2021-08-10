@@ -12,6 +12,7 @@
       :add-on-key="[13, 32]"
       :autocomplete-items="filteredItems"
       @tags-changed="newTags => tags = newTags"
+      
     />
   </div>
 </template>

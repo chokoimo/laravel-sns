@@ -5,6 +5,7 @@
 @section('content')
   @include('nav')
   <div class="container">
+    @csrf
     @foreach($articles as $article)
     @include('articles.card')
     @endforeach

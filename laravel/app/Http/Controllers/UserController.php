@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         $auth_id = Auth::user()->id;
         $user = User::where('id', $auth_id)->first();
-        
+
         return view('users.edit',[
             'user' => $user,
         ]);
@@ -34,9 +34,23 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $request->image->store('strorage/images', Auth::user()->id);
+        $user = new User;
+        $form = $request->all();
 
-        return redirect('users.update')->with('success', '新しいプロフィールを登録しました');
+        if (isset($form['image'])) {
+            $path = $request->file('image')->store('storage/images');
+            $user->image_path = basename($path);
+        } else {
+            $user->image_path = null;
+        }
+
+        unset($form['_token']);
+        unset($form['image']);
+
+        $user->fill($form);
+        $user->save();
+
+        return redirect('users.edit');
     }
 
     public function likes(string $name)

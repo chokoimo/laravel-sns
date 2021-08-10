@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="d-flex flex-row">
       <a href="{{ route('users.edit', ['name' => $user->name]) }}" class="text-dark">
-        <i class="fas fa-user-circle fa-3x"></i>
+      <img src="{{ asset("storage/images/$user->image_path") }}" width="100" height="100">
       </a>
       @if( Auth::id() !== $user->id )
         <follow-button
